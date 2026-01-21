@@ -1,0 +1,211 @@
+/* 针对所有可能的背景容器进行强制修改 */
+body, #web_bg {
+  background-image: url('https://sourcebucket.s3.bitiful.net/img/dm3.webp') !important;
+  background-attachment: fixed !important;
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+
+/* 深色模式强制覆盖 */
+[data-theme="dark"] body, 
+[data-theme="dark"] #web_bg {
+  background-image: url('https://sourcebucket.s3.bitiful.net/img/yuanshen1.webp') !important;
+  background-attachment: fixed !important;
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+
+/* 消除可能存在的半透明遮罩层 */
+#web_bg:before {
+  background: transparent !important;
+}
+
+/* 让首页卡片和侧边栏半透明，透出背景图 */
+#aside-content .card-widget, 
+.recent-post-item, 
+.layout_page > div:first-child:not(.recent-posts), 
+.layout_post > #post {
+  background: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* 深色模式下的卡片透明度 */
+[data-theme="dark"] #aside-content .card-widget, 
+[data-theme="dark"] .recent-post-item, 
+[data-theme="dark"] .layout_page > div:first-child:not(.recent-posts), 
+[data-theme="dark"] .layout_post > #post {
+  background: rgba(24, 23, 29, 0.85) !important;
+}
+
+/* 隐藏默认光标（可选，建议先保留调试） */
+/* body { cursor: none !important; } */
+
+#cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999;
+}
+
+/* 内点 */
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--anzhiyu-main);
+  border-radius: 50%;
+  position: absolute;
+  margin: -3px 0 0 -3px;
+  transition: transform 0.1s ease-out;
+}
+
+/* 外环 */
+.cursor-ring {
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--anzhiyu-main);
+  border-radius: 50%;
+  position: absolute;
+  margin: -15px 0 0 -15px;
+  transition: opacity 0.3s ease, width 0.3s ease, height 0.3s ease, margin 0.3s ease;
+}
+
+/* 悬停反馈 */
+#cursor.hover .cursor-ring {
+  width: 50px;
+  height: 50px;
+  margin: -25px 0 0 -25px;
+  background: var(--anzhiyu-main);
+  opacity: 0.2;
+}
+
+/* 点击涟漪 */
+.cursor-ripple {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: var(--anzhiyu-main);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  margin: -10px 0 0 -10px;
+  animation: ripple-animation 0.5s ease-out forwards;
+}
+
+@keyframes ripple-animation {
+  from { transform: scale(1); opacity: 0.4; }
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* 手机端隐藏 */
+@media screen and (max-width: 768px) {
+  #cursor { display: none; }
+}
+
+/* 玻璃材质光标 - 优化版 */
+#cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 999999; /* 确保在最顶层 */
+}
+
+/* 内点 - 提升亮度并置于玻璃之上 */
+.cursor-dot {
+  width: 8px; /* 稍微加大一点点 */
+  height: 8px;
+  background: #ff5e78; /* 换成亮粉色，非常吸睛且高级 */
+  border-radius: 50%;
+  position: absolute;
+  margin: -4px 0 0 -4px;
+  z-index: 2; /* 确保在玻璃环上面 */
+  box-shadow: 0 0 10px #ff5e78; /* 增加发光效果，防止被遮挡感 */
+}
+
+/* 外环 - 玻璃材质 */
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  margin: -20px 0 0 -20px;
+  border-radius: 50%;
+  z-index: 1; /* 在内点下方 */
+  
+  /* 玻璃质感 */
+  background: rgba(255, 255, 255, 0.15); 
+  backdrop-filter: blur(4px);            
+  -webkit-backdrop-filter: blur(4px);    
+  border: 1.5px solid rgba(255, 255, 255, 0.4); 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);    
+  
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 悬停效果 */
+#cursor.hover .cursor-ring {
+  width: 60px;
+  height: 60px;
+  margin: -30px 0 0 -30px;
+  background: rgba(255, 94, 120, 0.1); /* 悬停时玻璃环带一点点粉色 */
+  border-color: rgba(255, 94, 120, 0.5);
+  backdrop-filter: blur(6px);
+}
+
+/* 深色模式适配 */
+[data-theme="dark"] .cursor-dot {
+  background: #ffa500; /* 深色模式下可以换成亮橙色，像萤火虫一样 */
+  box-shadow: 0 0 15px #ffa500;
+}
+
+/* 隐藏全局系统光标 */
+html, body, a, button, input, textarea, .clickable {
+  cursor: none !important;
+}
+
+/* 确保自定义光标容器 */
+#cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 999999;
+}
+
+/* 内点 - 亮橙色/亮粉色发光 */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: #ffa500; /* 亮橙色 */
+  border-radius: 50%;
+  position: absolute;
+  margin: -4px 0 0 -4px;
+  z-index: 2;
+  box-shadow: 0 0 15px #ffa500; /* 强化发光 */
+}
+
+/* 外环 - 玻璃材质 */
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  margin: -20px 0 0 -20px;
+  border-radius: 50%;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.15); 
+  backdrop-filter: blur(4px);            
+  -webkit-backdrop-filter: blur(4px);    
+  border: 1.5px solid rgba(255, 255, 255, 0.4); 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);    
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 悬停效果：颜色同步变化 */
+#cursor.hover .cursor-ring {
+  width: 60px;
+  height: 60px;
+  margin: -30px 0 0 -30px;
+  background: rgba(255, 165, 0, 0.1); 
+  border-color: rgba(255, 165, 0, 0.5);
+}
