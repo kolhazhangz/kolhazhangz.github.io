@@ -210,23 +210,47 @@ html, body, a, button, input, textarea, .clickable {
   border-color: rgba(255, 165, 0, 0.5);
 }
 
-/* 隐藏 navbar 左侧的 logo/图标（包括 favicon 或 avatar 渲染的小图） */
+/* 彻底隐藏 navbar 左侧所有可能的图标、logo、avatar 相关元素 */
 .navbar-brand img,
 .navbar-logo img,
 .nav-logo img,
-.header-avatar img,
-#navbar .navbar-brand > img {  /* AnZhiYu 常见类名 */
+#navbar .navbar-brand img,
+.navbar-header img,
+.brand img,
+.navbar .logo img,
+.navbar-avatar img,
+.navbar .avatar img {
   display: none !important;
 }
 
-/* 如果有占位 div 或 a 标签的空白，额外隐藏或调整宽度 */
-.navbar-brand,
-.navbar-header .brand {
-  padding-left: 0 !important;   /* 去除左侧 padding，避免多余空白 */
-  min-width: auto !important;
+/* 隐藏任何可能的图标字体或伪元素图标（如 ::before 的 content） */
+.navbar-brand::before,
+.navbar-brand i,
+.navbar-brand .icon,
+.navbar-brand .anzhiyu-icon {
+  display: none !important;
 }
 
-/* 可选：让标题 "Kolhub" 靠左对齐更美观 */
-.navbar-brand {
+/* 强制移除左侧 padding/margin，让标题靠左，消除空白占位 */
+.navbar-brand,
+.navbar .container .navbar-brand,
+.navbar-header .brand,
+#navbar > .container > .navbar-brand {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
   margin-left: 0 !important;
+  min-width: auto !important;
+  width: auto !important;
+  flex: none !important;
+}
+
+/* 如果 navbar 有 flex 布局，防止空元素撑开 */
+.navbar .navbar-nav:first-child,
+.navbar .left {
+  margin-left: 0 !important;
+}
+
+/* 额外保险：隐藏任何可能的小方块或占位 div */
+.navbar-brand > *:not(.navbar-title):not(span):not(a) {
+  display: none !important;
 }
