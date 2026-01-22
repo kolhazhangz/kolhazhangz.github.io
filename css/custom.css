@@ -209,3 +209,24 @@ html, body, a, button, input, textarea, .clickable {
   background: rgba(255, 165, 0, 0.1); 
   border-color: rgba(255, 165, 0, 0.5);
 }
+
+/* 隐藏 navbar 左侧的 logo/图标（包括 favicon 或 avatar 渲染的小图） */
+.navbar-brand img,
+.navbar-logo img,
+.nav-logo img,
+.header-avatar img,
+#navbar .navbar-brand > img {  /* AnZhiYu 常见类名 */
+  display: none !important;
+}
+
+/* 如果有占位 div 或 a 标签的空白，额外隐藏或调整宽度 */
+.navbar-brand,
+.navbar-header .brand {
+  padding-left: 0 !important;   /* 去除左侧 padding，避免多余空白 */
+  min-width: auto !important;
+}
+
+/* 可选：让标题 "Kolhub" 靠左对齐更美观 */
+.navbar-brand {
+  margin-left: 0 !important;
+}
